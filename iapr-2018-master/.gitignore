@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Mac OS X
+.DS_Store
+
+# JetBrains
+.idea/
+
+# Data
+data/lab-01-data/
+data/lab-02-data/
+

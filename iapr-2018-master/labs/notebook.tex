@@ -1,0 +1,1494 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{lab\_02\_object\_description}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{\texorpdfstring{\href{https://github.com/LTS5/iapr-2018}{IAPR
+2018:} Lab 2 ‒ Object
+description}{IAPR 2018: Lab 2 ‒ Object description}}\label{iapr-2018iapr2018-lab-2-object-description}
+
+\textbf{Author:} Axel Manguy \textbf{Due date:} 04.05.2018
+
+    \subsection{Extract relevant data}\label{extract-relevant-data}
+
+We first need to extract the \texttt{lab-02-data.tar.gz} archive. To
+this end, we use the
+\href{https://docs.python.org/3.6/library/tarfile.html}{tarfile} module
+from the Python standard library.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{tarfile}
+        \PY{k+kn}{import} \PY{n+nn}{os}
+        
+        \PY{n}{data\PYZus{}base\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{pardir}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data\PYZus{}folder} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lab\PYZhy{}02\PYZhy{}data}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{tar\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{data\PYZus{}base\PYZus{}path}\PY{p}{,} \PY{n}{data\PYZus{}folder} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.tar.gz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{with} \PY{n}{tarfile}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{n}{tar\PYZus{}path}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r:gz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{tar}\PY{p}{:}
+            \PY{n}{tar}\PY{o}{.}\PY{n}{extractall}\PY{p}{(}\PY{n}{path}\PY{o}{=}\PY{n}{data\PYZus{}base\PYZus{}path}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Part 1}\label{part-1}
+
+In the \texttt{lab-02-data/part1} folder, you will find 28x28 grey-scale
+pictures of handwritten "0" and "1". These digits have been extracted
+from MNIST dataset (http://yann.lecun.com/exdb/mnist/).
+
+Your goal is to extract, from each of those images, a 2-dimensional
+feature vector (i.e. 2 features) and to plot them all on a 2D graph. If
+you have chosen good features, the vectors of the "0"'s should nicely
+cluster in one part of the plane and those of the "1"'s in another.
+
+Please try first the Fourier Descriptors. You can make several attempts:
+e.g. with and without invariance to rotation, translation, scaling, etc.
+You can also for instance rotate the images and assess the invariance in
+rotation.
+
+\textbf{Note:} for the Fourier descriptors, the u\_k signal has to be
+constructed by following the contour point after point. Some
+pre-processing (image binarization, possibly some Mathematical
+Morphology) might be useful.
+
+Then feel free to try other features, the more you try, the better it
+will be (for you).
+
+    \subsubsection{1.1 Data visualization and contour
+spectrum}\label{data-visualization-and-contour-spectrum}
+
+Before doing any operation on a images, and since we're going to extract
+frequencies, one first idea is to look at the spectrum of each contour.
+Using the marching square algorythm through the find\_contour method
+from skimage (details in section 1.2.2), we plot the amplitude for the
+10 first frequency. It appears that the first frequency performs well at
+distinguiching 0 from 1. All other frequency will not be relavant
+feature for that task.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{k+kn}{import} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{io}
+         \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{measure}
+         \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{feature}
+         \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{filters}
+         \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{morphology}
+         \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{filters} \PY{k}{import} \PY{n}{gaussian}
+         \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{segmentation} \PY{k}{import} \PY{n}{active\PYZus{}contour}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{fftpack} \PY{k}{import} \PY{n}{fft}\PY{p}{,} \PY{n}{ifft}
+         \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{morphology} \PY{k}{import} \PY{n}{skeletonize}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{c+c1}{\PYZsh{} Load images}
+         \PY{n}{data\PYZus{}base\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{pardir}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{data\PYZus{}folder} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lab\PYZhy{}02\PYZhy{}data}\PY{l+s+s1}{\PYZsq{}}
+         \PY{c+c1}{\PYZsh{}  Load zeros}
+         \PY{n}{zeros\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{data\PYZus{}base\PYZus{}path}\PY{p}{,} \PY{n}{data\PYZus{}folder}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{part1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{zeros\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{n}{nm} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{zeros\PYZus{}path}\PY{p}{)} \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.png}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{nm}\PY{p}{]}  \PY{c+c1}{\PYZsh{} make sure to only load .png}
+         \PY{n}{zeros\PYZus{}names}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} sort file names}
+         \PY{n}{ic} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{imread\PYZus{}collection}\PY{p}{(}\PY{p}{[}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{zeros\PYZus{}path}\PY{p}{,} \PY{n}{nm}\PY{p}{)} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{zeros\PYZus{}names}\PY{p}{]}\PY{p}{)}
+         \PY{n}{zeros\PYZus{}im} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{concatenate\PYZus{}images}\PY{p}{(}\PY{n}{ic}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}  Load ones}
+         \PY{n}{ones\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{data\PYZus{}base\PYZus{}path}\PY{p}{,} \PY{n}{data\PYZus{}folder}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{part1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ones\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{n}{nm} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{ones\PYZus{}path}\PY{p}{)} \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.png}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{nm}\PY{p}{]}  \PY{c+c1}{\PYZsh{} make sure to only load .png}
+         \PY{n}{ones\PYZus{}names}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} sort file names}
+         \PY{n}{ic} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{imread\PYZus{}collection}\PY{p}{(}\PY{p}{(}\PY{p}{[}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{ones\PYZus{}path}\PY{p}{,} \PY{n}{nm}\PY{p}{)} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{ones\PYZus{}names}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ones\PYZus{}im} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{concatenate\PYZus{}images}\PY{p}{(}\PY{n}{ic}\PY{p}{)}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{zeros\PYZus{}im}\PY{p}{)}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{n}{fft\PYZus{}lst\PYZus{}1}\PY{p}{,}\PY{n}{fft\PYZus{}lst\PYZus{}0}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{zeros\PYZus{}im}\PY{p}{,} \PY{n}{zeros\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}contours definition using marching squares}
+             \PY{n}{contours} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{find\PYZus{}contours}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}signal creation}
+             \PY{n}{signal} \PY{o}{=} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{p}{(}\PY{l+m+mi}{1}\PY{n}{j}\PY{o}{*}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{c+c1}{\PYZsh{}contours definition using marching squares}
+             \PY{n}{fourier}\PY{o}{=}\PY{n}{fft}\PY{p}{(}\PY{n}{signal}\PY{p}{)}
+             \PY{n}{fft\PYZus{}lst\PYZus{}0}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{fourier}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im}\PY{p}{,}\PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{nm}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}loop on ones}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ones\PYZus{}im}\PY{p}{,} \PY{n}{ones\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}contours definition using marching squares}
+             \PY{n}{contours} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{find\PYZus{}contours}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}signal creation}
+             \PY{n}{signal} \PY{o}{=} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{p}{(}\PY{l+m+mi}{1}\PY{n}{j}\PY{o}{*}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{c+c1}{\PYZsh{}contours definition using marching squares}
+             \PY{n}{fourier}\PY{o}{=}\PY{n}{fft}\PY{p}{(}\PY{n}{signal}\PY{p}{)}
+             \PY{n}{fft\PYZus{}lst\PYZus{}1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{fourier}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im}\PY{p}{,}\PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{nm}\PY{p}{)}
+             
+         \PY{n}{fig2}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,}\PY{n}{ax2}\PY{p}{,}\PY{n}{ax3}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{n}{fourier} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}0}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ax1}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}0}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax1}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{markerfmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C1o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax2}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}0}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax2}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{markerfmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C1o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax3}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}0}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax3}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{markerfmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C1o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{10 first descriptors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1st descriptor (module)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax3}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2nd descriptor (module)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}81}]:} Text(0.5,1,'2nd descriptor (module)')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{1.2 Fourier descriptors}\label{fourier-descriptors}
+
+Two different methods are tested for finding a contour. Since we're
+doing fourrier descriptors we need a contour that progress along the
+shape with a starting point and an end so we can convert it into a
+relevant signal. The two methods we found for that purpose are
+active\_contour (a minimising energy method) and find\_contour (a
+marching square method).
+
+    \paragraph{1.2.2 Fourier descriptors :
+active\_contour}\label{fourier-descriptors-active_contour}
+
+One main drawback of the active\_contour method is the difficulty to
+find the good set of parameters that will achive the task. In order to
+help the function giving the right contour, we skeletonize the initial
+shape before a gaussian filter so the center of shape appears bright and
+the edges more blur. This way, the snake will be atracted by the center
+of the shape rather than the details of its border. This is esspecially
+usefull for 1\_5 and 1\_9 thant have an odd shape. For these images, the
+method performs well and is able to extract some abstract shape of a one
+(just a straight line with thickness and orientation). However, the
+method is still doing mistakes on 1\_8 taking a noise for a part of the
+shape. Since there is very few pixels, The morphology operations we
+tried was destroying to much of the shape to be able to retrieve
+contour, so we decide to not implement then.
+
+By performing a fourier transform on images, we can extract f1 and f2.
+Without the phase and f0, the descriptors we selected are translation
+and rotation invariant. The rotation invariant is relavant since the one
+shapes can be inclined. Since all image have the same size and all shape
+more or less the same scale being scaling invariant is not that much
+important. However, and as expected the use of f1 is enough to
+discriminate one and zeros.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{feature}
+         \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{filters}
+         \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{morphology}
+         \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{filters} \PY{k}{import} \PY{n}{gaussian}
+         \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{segmentation} \PY{k}{import} \PY{n}{active\PYZus{}contour}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{fftpack} \PY{k}{import} \PY{n}{fft}\PY{p}{,} \PY{n}{ifft}
+         \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{morphology} \PY{k}{import} \PY{n}{skeletonize}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         
+         \PY{c+c1}{\PYZsh{}plot and list definition}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{zeros\PYZus{}im}\PY{p}{)}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{}snake initialisation}
+         \PY{n}{s} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{,} \PY{l+m+mi}{400}\PY{p}{)}
+         \PY{n}{x} \PY{o}{=} \PY{l+m+mf}{13.5} \PY{o}{+} \PY{l+m+mi}{12}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{s}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{l+m+mi}{13} \PY{o}{+} \PY{l+m+mi}{12}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{s}\PY{p}{)}
+         \PY{n}{init} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         
+         \PY{c+c1}{\PYZsh{}loop on zeros}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{zeros\PYZus{}im}\PY{p}{,} \PY{n}{zeros\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}active contour on filtered skeleton}
+             \PY{n}{zeros}\PY{o}{=}\PY{n}{im}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.9}
+             \PY{n}{skeleton} \PY{o}{=} \PY{n}{skeletonize}\PY{p}{(}\PY{n}{zeros}\PY{p}{)}
+             \PY{n}{snake\PYZus{}sk} \PY{o}{=} \PY{n}{active\PYZus{}contour}\PY{p}{(}\PY{n}{gaussian}\PY{p}{(}\PY{n}{skeleton}\PY{p}{)}\PY{p}{,}\PY{n}{init}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{beta}\PY{o}{=}\PY{l+m+mf}{8e3}\PY{p}{,} \PY{n}{gamma}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{w\PYZus{}line}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.2}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}signal creation}
+             \PY{n}{signal} \PY{o}{=} \PY{n}{snake\PYZus{}sk}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{p}{(}\PY{l+m+mi}{1}\PY{n}{j}\PY{o}{*}\PY{n}{snake\PYZus{}sk}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}fourier transform}
+             \PY{n}{fourier}\PY{o}{=}\PY{n}{fft}\PY{p}{(}\PY{n}{signal}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}2 first coef extraction}
+             \PY{c+c1}{\PYZsh{}abs to get to module invariant to rotation}
+             \PY{c+c1}{\PYZsh{}not taking f0 to be invariant to translation}
+             \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}plotting}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{gaussian}\PY{p}{(}\PY{n}{skeleton}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{snake\PYZus{}sk}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{snake\PYZus{}sk}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{nm}\PY{p}{)}
+             
+         \PY{c+c1}{\PYZsh{}loop on ones}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ones\PYZus{}im}\PY{p}{,} \PY{n}{ones\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}active contour}
+             \PY{n}{zeros}\PY{o}{=}\PY{n}{im}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.9}
+             \PY{n}{skeleton} \PY{o}{=} \PY{n}{skeletonize}\PY{p}{(}\PY{n}{zeros}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}active contour parameters are the same for ones and zeros, so a future automated system}
+             \PY{c+c1}{\PYZsh{}could perform detection not knowing if it\PYZsq{}s one or zero.}
+             \PY{n}{snake\PYZus{}sk} \PY{o}{=} \PY{n}{active\PYZus{}contour}\PY{p}{(}\PY{n}{gaussian}\PY{p}{(}\PY{n}{skeleton}\PY{p}{)}\PY{p}{,}\PY{n}{init}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{beta}\PY{o}{=}\PY{l+m+mf}{8e3}\PY{p}{,} \PY{n}{gamma}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{w\PYZus{}line}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.2}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}signal creation}
+             \PY{n}{signal} \PY{o}{=} \PY{n}{snake\PYZus{}sk}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{p}{(}\PY{l+m+mi}{1}\PY{n}{j}\PY{o}{*}\PY{n}{snake\PYZus{}sk}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}fourier transform}
+             \PY{n}{fourier}\PY{o}{=}\PY{n}{fft}\PY{p}{(}\PY{n}{signal}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}2 first coef extraction}
+             \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}plotting}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{snake\PYZus{}sk}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{snake\PYZus{}sk}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{gaussian}\PY{p}{(}\PY{n}{skeleton}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{nm}\PY{p}{)}
+             
+         \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,}\PY{n}{ax2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}first plot without phase}
+         \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}normalization for statistics}
+         \PY{n}{f1}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{f2}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f1 and f2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}second plot on ratio}
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{p}{)}
+         \PY{n}{f1\PYZus{}ratio}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{f2\PYZus{}ratio}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f1\PYZus{}ratio}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f1\PYZus{}ratio}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f1\PYZus{}ratio}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f1\PYZus{}ratio}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f2\PYZus{}ratio}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f2\PYZus{}ratio}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f2\PYZus{}ratio}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f2\PYZus{}ratio}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f1/f2 and f2/f3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}displaying intra and extra class variance}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f1 and f2 :intra\PYZhy{}class variance for zeros: }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{ and  }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f1 and f2 :intra\PYZhy{}class variance for ones : }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{ and  }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ratios :intra\PYZhy{}class variance for zeros: }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{ and  }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ratios :intra\PYZhy{}class variance for ones : }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{ and  }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+f1 and f2 :intra-class variance for zeros: 0.43 and  0.35
+f1 and f2 :intra-class variance for ones : 0.07 and  1.65
+ratios :intra-class variance for zeros: 0.25 and  0.92
+ratios :intra-class variance for ones : 0.26 and  1.05
+
+    \end{Verbatim}
+
+    \paragraph{1.2.2 Fourier descriptors :
+find\_contour}\label{fourier-descriptors-find_contour}
+
+Even if the previous method was performing well on finding contour, we
+also wanted to tried a method that take the whole shape into account.
+Especially for the ones, only taking the straight line in the center
+delete some information that could be usefull for other recognition. The
+find contour method works by diving the area into a grid and performing
+a linear interpolation. For each cell of the grid, the marching square
+method looks at the grayscale value of each corner to define the
+isoline. In our case the isoline will be the contour we're searching
+for.
+
+The method for feature extraction is the same as before, we first
+contruct the signal base on the contour. perform a fourier transform on
+that signal and take f1 and f2 as descriptors. The results are the same
+as before except, the intraclass variance is a litllte bit beter for
+zeros. Since we are taking the whole shape of the ones, the intra-class
+variance for the ones is higher due to 1\_5 and 1-9.
+
+In order to compare the two method, we used normalization on data so the
+variance computation is done on the same scale.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{measure}
+         \PY{c+c1}{\PYZsh{}plot and list definition}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{zeros\PYZus{}im}\PY{p}{)}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{zeros\PYZus{}im}\PY{p}{,} \PY{n}{zeros\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}contours definition using marching squares}
+             \PY{n}{contours} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{find\PYZus{}contours}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}signal creation}
+             \PY{n}{signal} \PY{o}{=} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{p}{(}\PY{l+m+mi}{1}\PY{n}{j}\PY{o}{*}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}fourier transform}
+             \PY{n}{fourier}\PY{o}{=}\PY{n}{fft}\PY{p}{(}\PY{n}{signal}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}2 first coef extraction}
+             \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}plotting}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{nm}\PY{p}{)}
+             
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ones\PYZus{}im}\PY{p}{,} \PY{n}{ones\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}contours definition using marching squares}
+             \PY{n}{contours} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{find\PYZus{}contours}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}signal creation}
+             \PY{n}{signal} \PY{o}{=} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{p}{(}\PY{l+m+mi}{1}\PY{n}{j}\PY{o}{*}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}fourier transform}
+             \PY{n}{fourier}\PY{o}{=}\PY{n}{fft}\PY{p}{(}\PY{n}{signal}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}2 first coef extraction}
+             \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}plotting}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{nm}\PY{p}{)}
+             
+         \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,}\PY{n}{ax2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}first plot without phase}
+         \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}normalization for statistics}
+         \PY{n}{f1}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{f2}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f1 and f2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}second plot on ratio}
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{p}{)}
+         \PY{n}{f1\PYZus{}ratio}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{f2\PYZus{}ratio}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f1\PYZus{}ratio}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f1\PYZus{}ratio}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f1\PYZus{}ratio}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f1\PYZus{}ratio}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f2\PYZus{}ratio}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f2\PYZus{}ratio}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f2\PYZus{}ratio}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f2\PYZus{}ratio}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f1/f2 and f2/f3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}displaying intra and extra class variance}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f1 and f2 :intra\PYZhy{}class variance for zeros: }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{ and  }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f1 and f2 :intra\PYZhy{}class variance for ones : }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{ and  }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ratios    :intra\PYZhy{}class variance for zeros: }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{ and  }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ratios    :intra\PYZhy{}class variance for ones : }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{ and  }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ratio}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+f1 and f2 :intra-class variance for zeros: 0.20 and  0.19
+f1 and f2 :intra-class variance for ones : 0.32 and  1.77
+ratios    :intra-class variance for zeros: 1.16 and  0.86
+ratios    :intra-class variance for ones : 0.02 and  1.13
+
+    \end{Verbatim}
+
+    \subsubsection{1.4 Region Based
+Descriptors}\label{region-based-descriptors}
+
+For region based descriptors 3 different couples of descriptors have
+been tried. The region is extracted through The first couple is
+performing well and both area and perimeters are features that can be
+used on their own to perform the detection (with a simple threshold).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{measure}
+         \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{morphology} \PY{k}{import} \PY{n}{binary\PYZus{}opening}\PY{p}{,}\PY{n}{erosion}\PY{p}{,}\PY{n}{closing}\PY{p}{,}\PY{n}{square}
+         \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{morphology} \PY{k}{import} \PY{n}{skeletonize}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{lines} \PY{k}{import} \PY{n}{Line2D} 
+         
+         \PY{c+c1}{\PYZsh{}feature list initialization}
+         \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Plot images}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{zeros\PYZus{}im}\PY{p}{)}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{zeros\PYZus{}im}\PY{p}{,} \PY{n}{zeros\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}regions detections}
+             \PY{n}{label\PYZus{}img} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{label}\PY{p}{(}\PY{n}{im}\PY{o}{\PYZgt{}}\PY{l+m+mi}{100}\PY{p}{)} \PY{c+c1}{\PYZsh{}converting to binary }
+             \PY{c+c1}{\PYZsh{}label\PYZus{}img= erosion(label\PYZus{}img,square(2))}
+             \PY{n}{regions} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{regionprops}\PY{p}{(}\PY{n}{label\PYZus{}img}\PY{p}{)}
+             \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{props} \PY{o+ow}{in} \PY{n}{regions}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}adding area and perimeter as feature}
+                 \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{p}{)}
+                 \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{perimeter}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{}selecting the largest area (for 1\PYZus{}8)}
+                 \PY{k}{if} \PY{n}{props}\PY{o}{.}\PY{n}{area} \PY{o}{==} \PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{p}{)}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{}eigenvalues}
+                     \PY{n}{eigvals}\PY{o}{=}\PY{n}{props}\PY{o}{.}\PY{n}{inertia\PYZus{}tensor\PYZus{}eigvals}
+                     \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{eigvals}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{eigvals}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                     
+                     \PY{c+c1}{\PYZsh{}compacity and rectangularity}
+                     \PY{n}{compacity} \PY{o}{=} \PY{p}{(}\PY{n}{props}\PY{o}{.}\PY{n}{perimeter}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{n}{props}\PY{o}{.}\PY{n}{area}
+                     \PY{n}{rectangularity} \PY{o}{=} \PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{o}{/}\PY{n}{props}\PY{o}{.}\PY{n}{bbox\PYZus{}area}
+                     \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{compacity} \PY{p}{,}\PY{n}{rectangularity}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}plotting}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{label\PYZus{}img}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{nm}\PY{p}{)}
+             
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ones\PYZus{}im}\PY{p}{,} \PY{n}{ones\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}regions detections}
+             \PY{n}{label\PYZus{}img} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{label}\PY{p}{(}\PY{n}{im}\PY{o}{\PYZgt{}}\PY{l+m+mi}{100}\PY{p}{)}
+             \PY{n}{regions} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{regionprops}\PY{p}{(}\PY{n}{label\PYZus{}img}\PY{p}{)}
+             \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{props} \PY{o+ow}{in} \PY{n}{regions}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}adding area and perimeter as feature}
+                 \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{p}{)}
+                 \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{perimeter}\PY{p}{)}
+                 
+                 \PY{k}{if} \PY{n}{props}\PY{o}{.}\PY{n}{area} \PY{o}{==} \PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{p}{)}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{}eigenvalues}
+                     \PY{n}{eigvals}\PY{o}{=}\PY{n}{props}\PY{o}{.}\PY{n}{inertia\PYZus{}tensor\PYZus{}eigvals}
+                     \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{eigvals}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{eigvals}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                     
+                     \PY{c+c1}{\PYZsh{}compacity and rectangularity}
+                     \PY{n}{compacity} \PY{o}{=} \PY{p}{(}\PY{n}{props}\PY{o}{.}\PY{n}{perimeter}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{n}{props}\PY{o}{.}\PY{n}{area}
+                     \PY{n}{rectangularity} \PY{o}{=} \PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{o}{/}\PY{n}{props}\PY{o}{.}\PY{n}{bbox\PYZus{}area}
+                     \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{compacity} \PY{p}{,}\PY{n}{rectangularity}\PY{p}{]}\PY{p}{)}
+                     
+             \PY{c+c1}{\PYZsh{}plotting    }
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{label\PYZus{}img}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{nm}\PY{p}{)}
+             
+         
+         \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,}\PY{n}{ax2}\PY{p}{,}\PY{n}{ax3}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}first plot and normalization to compare}
+         \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{)}
+         \PY{n}{f1}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{f2}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+m+mf}{0.25}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{area and perimeter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}second plot and also normalization}
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{p}{)}
+         \PY{n}{f1}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{f2}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{eigenvalues}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}third plot and also normalization}
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{p}{)}
+         \PY{n}{f1}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{f2}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax3}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax3}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax3}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax3}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{compacity and rectangularity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax3}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}displaying intra and extra class variance}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A and P :intra\PYZhy{}class variance for zeros: }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{ and  }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A and P :intra\PYZhy{}class variance for ones : }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{ and  }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C and R :intra\PYZhy{}class variance for zeros: }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{ and  }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C and R :intra\PYZhy{}class variance for ones : }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{ and  }\PY{l+s+si}{\PYZob{}:.02f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+A and P :intra-class variance for zeros: 0.28 and  0.12
+A and P :intra-class variance for ones : 0.09 and  0.09
+C and R :intra-class variance for zeros: 0.19 and  0.22
+C and R :intra-class variance for ones : 0.66 and  0.66
+
+    \end{Verbatim}
+
+    \subsection{Part 2}\label{part-2}
+
+The \texttt{lab-02-data/part2} folder contains grey-scale pictures of
+handwritten "2" and "3". Extract the same feature (typically 2 Fourier
+descriptors) as in part 1 also on these images and plot them on the same
+graph as the features of the "0" and "1". Is it possible to discriminate
+all these 4 digits with a 2-dimensional feature vector?
+
+    \subsubsection{1.1 Data visualization}\label{data-visualization}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{}  Load twos}
+         \PY{n}{twos\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{data\PYZus{}base\PYZus{}path}\PY{p}{,} \PY{n}{data\PYZus{}folder}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{part2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{twos\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{n}{nm} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{twos\PYZus{}path}\PY{p}{)} \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.png}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{nm}\PY{p}{]}  \PY{c+c1}{\PYZsh{} make sure to only load .png}
+         \PY{n}{twos\PYZus{}names}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} sort file names}
+         \PY{n}{ic} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{imread\PYZus{}collection}\PY{p}{(}\PY{p}{[}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{twos\PYZus{}path}\PY{p}{,} \PY{n}{nm}\PY{p}{)} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{twos\PYZus{}names}\PY{p}{]}\PY{p}{)}
+         \PY{n}{twos\PYZus{}im} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{concatenate\PYZus{}images}\PY{p}{(}\PY{n}{ic}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}  Load threes}
+         \PY{n}{threes\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{data\PYZus{}base\PYZus{}path}\PY{p}{,} \PY{n}{data\PYZus{}folder}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{part2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{threes\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{n}{nm} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{threes\PYZus{}path}\PY{p}{)} \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.png}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{nm}\PY{p}{]}  \PY{c+c1}{\PYZsh{} make sure to only load .png}
+         \PY{n}{threes\PYZus{}names}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} sort file names}
+         \PY{n}{ic} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{imread\PYZus{}collection}\PY{p}{(}\PY{p}{(}\PY{p}{[}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{threes\PYZus{}path}\PY{p}{,} \PY{n}{nm}\PY{p}{)} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{threes\PYZus{}names}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{threes\PYZus{}im} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{concatenate\PYZus{}images}\PY{p}{(}\PY{n}{ic}\PY{p}{)}
+         
+         \PY{n}{fft\PYZus{}lst\PYZus{}1}\PY{p}{,}\PY{n}{fft\PYZus{}lst\PYZus{}0}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}
+         \PY{n}{fft\PYZus{}lst\PYZus{}2}\PY{p}{,}\PY{n}{fft\PYZus{}lst\PYZus{}3}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{zeros\PYZus{}im}\PY{p}{)}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{zeros\PYZus{}im}\PY{p}{,} \PY{n}{zeros\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}contours definition using marching squares}
+             \PY{n}{contours} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{find\PYZus{}contours}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{)}
+             \PY{n}{signal} \PY{o}{=} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{p}{(}\PY{l+m+mi}{1}\PY{n}{j}\PY{o}{*}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{fourier}\PY{o}{=}\PY{n}{fft}\PY{p}{(}\PY{n}{signal}\PY{p}{)}
+             \PY{n}{fft\PYZus{}lst\PYZus{}0}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{fourier}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ones\PYZus{}im}\PY{p}{,} \PY{n}{ones\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}contours definition using marching squares}
+             \PY{n}{contours} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{find\PYZus{}contours}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{)}
+             \PY{n}{signal} \PY{o}{=} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{p}{(}\PY{l+m+mi}{1}\PY{n}{j}\PY{o}{*}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{fourier}\PY{o}{=}\PY{n}{fft}\PY{p}{(}\PY{n}{signal}\PY{p}{)}
+             \PY{n}{fft\PYZus{}lst\PYZus{}1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{fourier}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{twos\PYZus{}im}\PY{p}{,} \PY{n}{twos\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}contours definition using marching squares}
+             \PY{n}{contours} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{find\PYZus{}contours}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{)}
+             \PY{n}{signal} \PY{o}{=} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{p}{(}\PY{l+m+mi}{1}\PY{n}{j}\PY{o}{*}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{fourier}\PY{o}{=}\PY{n}{fft}\PY{p}{(}\PY{n}{signal}\PY{p}{)}
+             \PY{n}{fft\PYZus{}lst\PYZus{}2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{fourier}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{threes\PYZus{}im}\PY{p}{,} \PY{n}{threes\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}contours definition using marching squares}
+             \PY{n}{contours} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{find\PYZus{}contours}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{)}
+             \PY{n}{signal} \PY{o}{=} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{p}{(}\PY{l+m+mi}{1}\PY{n}{j}\PY{o}{*}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{fourier}\PY{o}{=}\PY{n}{fft}\PY{p}{(}\PY{n}{signal}\PY{p}{)}
+             \PY{n}{fft\PYZus{}lst\PYZus{}3}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{fourier}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{fig2}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,}\PY{n}{ax2}\PY{p}{,}\PY{n}{ax3}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{n}{fourier} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}0}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ax1}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}0}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax1}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{markerfmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C1o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax1}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{markerfmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C2o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax1}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}3}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{markerfmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C3o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{ax2}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}0}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax2}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{markerfmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C1o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax2}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{markerfmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C2o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax2}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}3}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{markerfmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C3o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{ax3}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}0}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax3}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{markerfmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C1o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax3}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{markerfmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C2o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax3}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}3}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{markerfmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C3o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{10 first descriptors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{descriptor no1 (module)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax3}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{descriptor no4 (module)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:} Text(0.5,1,'descriptor no4 (module)')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{1.2 Fourier descriptors}\label{fourier-descriptors}
+
+Add your implementation and discussion
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}2}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}3}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{} Plot images}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{zeros\PYZus{}im}\PY{p}{)}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{zeros\PYZus{}im}\PY{p}{,} \PY{n}{zeros\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}contours definition using marching squares}
+             \PY{n}{contours} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{find\PYZus{}contours}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{)}   
+             \PY{c+c1}{\PYZsh{}signal creation}
+             \PY{n}{signal} \PY{o}{=} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{p}{(}\PY{l+m+mi}{1}\PY{n}{j}\PY{o}{*}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}   
+             \PY{c+c1}{\PYZsh{}fourier transform}
+             \PY{n}{fourier}\PY{o}{=}\PY{n}{fft}\PY{p}{(}\PY{n}{signal}\PY{p}{)}   
+             \PY{c+c1}{\PYZsh{}2 first coef extraction}
+             \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}   
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ones\PYZus{}im}\PY{p}{,} \PY{n}{ones\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}contours definition using marching squares}
+             \PY{n}{contours} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{find\PYZus{}contours}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{)}   
+             \PY{c+c1}{\PYZsh{}signal creation}
+             \PY{n}{signal} \PY{o}{=} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{p}{(}\PY{l+m+mi}{1}\PY{n}{j}\PY{o}{*}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}   
+             \PY{c+c1}{\PYZsh{}fourier transform}
+             \PY{n}{fourier}\PY{o}{=}\PY{n}{fft}\PY{p}{(}\PY{n}{signal}\PY{p}{)}   
+             \PY{c+c1}{\PYZsh{}2 first coef extraction}
+             \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}   
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{twos\PYZus{}im}\PY{p}{,} \PY{n}{twos\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}contours definition using marching squares}
+             \PY{n}{contours} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{find\PYZus{}contours}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{)}   
+             \PY{c+c1}{\PYZsh{}signal creation}
+             \PY{n}{signal} \PY{o}{=} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{p}{(}\PY{l+m+mi}{1}\PY{n}{j}\PY{o}{*}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}   
+             \PY{c+c1}{\PYZsh{}fourier transform}
+             \PY{n}{fourier}\PY{o}{=}\PY{n}{fft}\PY{p}{(}\PY{n}{signal}\PY{p}{)}   
+             \PY{c+c1}{\PYZsh{}2 first coef extraction}
+             \PY{n}{feature\PYZus{}list\PYZus{}2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}   
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{threes\PYZus{}im}\PY{p}{,} \PY{n}{threes\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}contours definition using marching squares}
+             \PY{n}{contours} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{find\PYZus{}contours}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{)}   
+             \PY{c+c1}{\PYZsh{}signal creation}
+             \PY{n}{signal} \PY{o}{=} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{p}{(}\PY{l+m+mi}{1}\PY{n}{j}\PY{o}{*}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}   
+             \PY{c+c1}{\PYZsh{}fourier transform}
+             \PY{n}{fourier}\PY{o}{=}\PY{n}{fft}\PY{p}{(}\PY{n}{signal}\PY{p}{)}   
+             \PY{c+c1}{\PYZsh{}2 first coef extraction}
+             \PY{n}{feature\PYZus{}list\PYZus{}3}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}   
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             
+         \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,}\PY{n}{ax2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}first plot without phase}
+         \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}2}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}3}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}2}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}3}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}2}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}2}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}3}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}3}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}2}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}2}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}3}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}3}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{1.3 Additional method(s)}\label{additional-methods}
+
+Add your implementation and discussion
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{measure}
+         \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{morphology} \PY{k}{import} \PY{n}{binary\PYZus{}opening}\PY{p}{,}\PY{n}{erosion}\PY{p}{,}\PY{n}{closing}\PY{p}{,}\PY{n}{square}
+         \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{morphology} \PY{k}{import} \PY{n}{skeletonize}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{lines} \PY{k}{import} \PY{n}{Line2D} 
+         
+         \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}2}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}2\PYZus{}ev}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}2\PYZus{}cr}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}3}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}3\PYZus{}ev}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}3\PYZus{}cr}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{} Plot images}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{zeros\PYZus{}im}\PY{p}{)}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{zeros\PYZus{}im}\PY{p}{,} \PY{n}{zeros\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}regions detections}
+             \PY{n}{label\PYZus{}img} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{label}\PY{p}{(}\PY{n}{im}\PY{o}{\PYZgt{}}\PY{l+m+mi}{100}\PY{p}{)} \PY{c+c1}{\PYZsh{}converting to binary }
+             \PY{c+c1}{\PYZsh{}label\PYZus{}img= erosion(label\PYZus{}img,square(2))}
+             \PY{n}{regions} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{regionprops}\PY{p}{(}\PY{n}{label\PYZus{}img}\PY{p}{)}
+             \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}   
+             \PY{k}{for} \PY{n}{props} \PY{o+ow}{in} \PY{n}{regions}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}adding area and perimeter as feature}
+                 \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{p}{)}
+                 \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{perimeter}\PY{p}{)}       
+                 \PY{c+c1}{\PYZsh{}selecting the largest area (for 1\PYZus{}8)}
+                 \PY{k}{if} \PY{n}{props}\PY{o}{.}\PY{n}{area} \PY{o}{==} \PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{p}{)}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{}eigenvalues}
+                     \PY{n}{eigvals}\PY{o}{=}\PY{n}{props}\PY{o}{.}\PY{n}{inertia\PYZus{}tensor\PYZus{}eigvals}
+                     \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{eigvals}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{eigvals}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}           
+                     \PY{c+c1}{\PYZsh{}compacity and rectangularity}
+                     \PY{n}{compacity} \PY{o}{=} \PY{p}{(}\PY{n}{props}\PY{o}{.}\PY{n}{perimeter}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{n}{props}\PY{o}{.}\PY{n}{area}
+                     \PY{n}{rectangularity} \PY{o}{=} \PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{o}{/}\PY{n}{props}\PY{o}{.}\PY{n}{bbox\PYZus{}area}
+                     \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{compacity} \PY{p}{,}\PY{n}{rectangularity}\PY{p}{]}\PY{p}{)}
+                     
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{label\PYZus{}img}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ones\PYZus{}im}\PY{p}{,} \PY{n}{ones\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}regions detections}
+             \PY{n}{label\PYZus{}img} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{label}\PY{p}{(}\PY{n}{im}\PY{o}{\PYZgt{}}\PY{l+m+mi}{100}\PY{p}{)} \PY{c+c1}{\PYZsh{}converting to binary }
+             \PY{c+c1}{\PYZsh{}label\PYZus{}img= erosion(label\PYZus{}img,square(2))}
+             \PY{n}{regions} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{regionprops}\PY{p}{(}\PY{n}{label\PYZus{}img}\PY{p}{)}
+             \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}   
+             \PY{k}{for} \PY{n}{props} \PY{o+ow}{in} \PY{n}{regions}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}adding area and perimeter as feature}
+                 \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{p}{)}
+                 \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{perimeter}\PY{p}{)}       
+                 \PY{c+c1}{\PYZsh{}selecting the largest area (for 1\PYZus{}8)}
+                 \PY{k}{if} \PY{n}{props}\PY{o}{.}\PY{n}{area} \PY{o}{==} \PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{p}{)}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{}eigenvalues}
+                     \PY{n}{eigvals}\PY{o}{=}\PY{n}{props}\PY{o}{.}\PY{n}{inertia\PYZus{}tensor\PYZus{}eigvals}
+                     \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{eigvals}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{eigvals}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}           
+                     \PY{c+c1}{\PYZsh{}compacity and rectangularity}
+                     \PY{n}{compacity} \PY{o}{=} \PY{p}{(}\PY{n}{props}\PY{o}{.}\PY{n}{perimeter}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{n}{props}\PY{o}{.}\PY{n}{area}
+                     \PY{n}{rectangularity} \PY{o}{=} \PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{o}{/}\PY{n}{props}\PY{o}{.}\PY{n}{bbox\PYZus{}area}
+                     \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{compacity} \PY{p}{,}\PY{n}{rectangularity}\PY{p}{]}\PY{p}{)}
+                     
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{label\PYZus{}img}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{twos\PYZus{}im}\PY{p}{,} \PY{n}{twos\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}regions detections}
+             \PY{n}{label\PYZus{}img} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{label}\PY{p}{(}\PY{n}{im}\PY{o}{\PYZgt{}}\PY{l+m+mi}{100}\PY{p}{)} \PY{c+c1}{\PYZsh{}converting to binary }
+             \PY{c+c1}{\PYZsh{}label\PYZus{}img= erosion(label\PYZus{}img,square(2))}
+             \PY{n}{regions} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{regionprops}\PY{p}{(}\PY{n}{label\PYZus{}img}\PY{p}{)}
+             \PY{n}{feature\PYZus{}list\PYZus{}2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}   
+             \PY{k}{for} \PY{n}{props} \PY{o+ow}{in} \PY{n}{regions}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}adding area and perimeter as feature}
+                 \PY{n}{feature\PYZus{}list\PYZus{}2}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}2}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{p}{)}
+                 \PY{n}{feature\PYZus{}list\PYZus{}2}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}2}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{perimeter}\PY{p}{)}       
+                 \PY{c+c1}{\PYZsh{}selecting the largest area (for 1\PYZus{}8)}
+                 \PY{k}{if} \PY{n}{props}\PY{o}{.}\PY{n}{area} \PY{o}{==} \PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}2}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{p}{)}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{}eigenvalues}
+                     \PY{n}{eigvals}\PY{o}{=}\PY{n}{props}\PY{o}{.}\PY{n}{inertia\PYZus{}tensor\PYZus{}eigvals}
+                     \PY{n}{feature\PYZus{}list\PYZus{}2\PYZus{}ev}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{eigvals}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{eigvals}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}           
+                     \PY{c+c1}{\PYZsh{}compacity and rectangularity}
+                     \PY{n}{compacity} \PY{o}{=} \PY{p}{(}\PY{n}{props}\PY{o}{.}\PY{n}{perimeter}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{n}{props}\PY{o}{.}\PY{n}{area}
+                     \PY{n}{rectangularity} \PY{o}{=} \PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{o}{/}\PY{n}{props}\PY{o}{.}\PY{n}{bbox\PYZus{}area}
+                     \PY{n}{feature\PYZus{}list\PYZus{}2\PYZus{}cr}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{compacity} \PY{p}{,}\PY{n}{rectangularity}\PY{p}{]}\PY{p}{)}
+                     
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{label\PYZus{}img}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{threes\PYZus{}im}\PY{p}{,} \PY{n}{threes\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}regions detections}
+             \PY{n}{label\PYZus{}img} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{label}\PY{p}{(}\PY{n}{im}\PY{o}{\PYZgt{}}\PY{l+m+mi}{100}\PY{p}{)} \PY{c+c1}{\PYZsh{}converting to binary }
+             \PY{c+c1}{\PYZsh{}label\PYZus{}img= erosion(label\PYZus{}img,square(2))}
+             \PY{n}{regions} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{regionprops}\PY{p}{(}\PY{n}{label\PYZus{}img}\PY{p}{)}
+             \PY{n}{feature\PYZus{}list\PYZus{}3}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}   
+             \PY{k}{for} \PY{n}{props} \PY{o+ow}{in} \PY{n}{regions}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}adding area and perimeter as feature}
+                 \PY{n}{feature\PYZus{}list\PYZus{}3}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}3}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{p}{)}
+                 \PY{n}{feature\PYZus{}list\PYZus{}3}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}3}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{perimeter}\PY{p}{)}       
+                 \PY{c+c1}{\PYZsh{}selecting the largest area (for 1\PYZus{}8)}
+                 \PY{k}{if} \PY{n}{props}\PY{o}{.}\PY{n}{area} \PY{o}{==} \PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}3}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{p}{)}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{}eigenvalues}
+                     \PY{n}{eigvals}\PY{o}{=}\PY{n}{props}\PY{o}{.}\PY{n}{inertia\PYZus{}tensor\PYZus{}eigvals}
+                     \PY{n}{feature\PYZus{}list\PYZus{}3\PYZus{}ev}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{eigvals}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{eigvals}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}           
+                     \PY{c+c1}{\PYZsh{}compacity and rectangularity}
+                     \PY{n}{compacity} \PY{o}{=} \PY{p}{(}\PY{n}{props}\PY{o}{.}\PY{n}{perimeter}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{n}{props}\PY{o}{.}\PY{n}{area}
+                     \PY{n}{rectangularity} \PY{o}{=} \PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{o}{/}\PY{n}{props}\PY{o}{.}\PY{n}{bbox\PYZus{}area}
+                     \PY{n}{feature\PYZus{}list\PYZus{}3\PYZus{}cr}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{compacity} \PY{p}{,}\PY{n}{rectangularity}\PY{p}{]}\PY{p}{)}
+                     
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{label\PYZus{}img}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             
+         \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,}\PY{n}{ax2}\PY{p}{,}\PY{n}{ax3}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}first plot without phase}
+         \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}2}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}3}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}2}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}3}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}2}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}2}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}3}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}3}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}2\PYZus{}ev}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}3\PYZus{}ev}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}2\PYZus{}ev}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}3\PYZus{}ev}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}2\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}2\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}3\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}3\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}2\PYZus{}cr}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}3\PYZus{}cr}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}2\PYZus{}cr}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}3\PYZus{}cr}\PY{p}{)}
+         \PY{n}{ax3}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax3}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax3}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}2\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}2\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax3}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}3\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}3\PYZus{}cr}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax3}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{1.3 Chain Code and Edit
+Distance}\label{chain-code-and-edit-distance}
+
+What is the reference shape ? Still useless for now
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{}From my own interpretation}
+         \PY{k}{def} \PY{n+nf}{contour2path}\PY{p}{(}\PY{n}{contour}\PY{p}{)}\PY{p}{:}
+             \PY{n}{path}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+             \PY{n}{directions} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{n}{pos} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{contour}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{n+nb}{len}\PY{p}{(}\PY{n}{contour}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+                     \PY{k}{return} \PY{n}{path}
+                 \PY{n}{newpos} \PY{o}{=} \PY{n}{pos} \PY{o}{+} \PY{n}{directions}
+                 \PY{n}{dist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{contour}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{newpos}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{path}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{n}{dist}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 
+         
+         \PY{c+c1}{\PYZsh{}                      From wikipedia}
+         \PY{c+c1}{\PYZsh{}https://en.wikipedia.org/wiki/Wagner\PYZpc{}E2\PYZpc{}80\PYZpc{}93Fischer\PYZus{}algorithm}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{k}{def} \PY{n+nf}{edit\PYZus{}distance}\PY{p}{(}\PY{n}{path1}\PY{p}{,}\PY{n}{path2}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}For all i and j, d[i,j] will hold the Levenshtein distance between}
+             \PY{c+c1}{\PYZsh{} the first i characters of s and the first j characters of t.}
+             \PY{c+c1}{\PYZsh{} Note that d has (m+1) x (n+1) values.}
+             \PY{c+c1}{\PYZsh{}let d be a 2\PYZhy{}d array of int with dimensions [0..m, 0..n]}
+             \PY{n}{d}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{path1}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{path2}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{path1}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{d}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{i} 
+                 \PY{c+c1}{\PYZsh{} the distance of any first string to an empty second string}
+                 \PY{c+c1}{\PYZsh{} (transforming the string of the first i characters of s into}
+                 \PY{c+c1}{\PYZsh{} the empty string requires i deletions)}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{path2}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{d}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{j} \PY{c+c1}{\PYZsh{} the distance of any second string to an empty first string}
+           
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{path2}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{path1}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{}print(i,j)}
+                     \PY{k}{if} \PY{n}{path1}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{n}{path2}\PY{p}{[}\PY{n}{j}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{p}{:}
+                         \PY{n}{d}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{d}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{j}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{c+c1}{\PYZsh{} no operation required}
+                     \PY{k}{else}\PY{p}{:}
+                         \PY{n}{d}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{[}\PY{n}{d}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{j}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,}
+                                           \PY{n}{d}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,}
+                                           \PY{n}{d}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{j}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{k}{return} \PY{n}{d}\PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{path1}\PY{p}{)}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{path2}\PY{p}{)}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{edit\PYZus{}distance}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{saturda}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sunday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{edit\PYZus{}distance}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{12345}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{125489}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+                 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+4.0
+3.0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{measure}
+         \PY{c+c1}{\PYZsh{}  Load zeros}
+         \PY{n}{twos\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{data\PYZus{}base\PYZus{}path}\PY{p}{,} \PY{n}{data\PYZus{}folder}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{part1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{twos\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{n}{nm} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{twos\PYZus{}path}\PY{p}{)} \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.png}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{nm}\PY{p}{]}  \PY{c+c1}{\PYZsh{} make sure to only load .png}
+         \PY{n}{twos\PYZus{}names}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} sort file names}
+         \PY{n}{ic} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{imread\PYZus{}collection}\PY{p}{(}\PY{p}{[}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{twos\PYZus{}path}\PY{p}{,} \PY{n}{nm}\PY{p}{)} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{twos\PYZus{}names}\PY{p}{]}\PY{p}{)}
+         \PY{n}{twos\PYZus{}im} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{concatenate\PYZus{}images}\PY{p}{(}\PY{n}{ic}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}  Load ones}
+         \PY{n}{threes\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{data\PYZus{}base\PYZus{}path}\PY{p}{,} \PY{n}{data\PYZus{}folder}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{part1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{threes\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{n}{nm} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{threes\PYZus{}path}\PY{p}{)} \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.png}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{nm}\PY{p}{]}  \PY{c+c1}{\PYZsh{} make sure to only load .png}
+         \PY{n}{threes\PYZus{}names}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} sort file names}
+         \PY{n}{ic} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{imread\PYZus{}collection}\PY{p}{(}\PY{p}{(}\PY{p}{[}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{threes\PYZus{}path}\PY{p}{,} \PY{n}{nm}\PY{p}{)} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{threes\PYZus{}names}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{threes\PYZus{}im} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{concatenate\PYZus{}images}\PY{p}{(}\PY{n}{ic}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot images}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{twos\PYZus{}im}\PY{p}{)}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{twos\PYZus{}im}\PY{p}{,} \PY{n}{twos\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{n}{contours} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{find\PYZus{}contours}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}chain code}
+             \PY{n}{chain} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{contour2path}\PY{p}{(}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{chain}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{threes\PYZus{}im}\PY{p}{,} \PY{n}{threes\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{n}{contours} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{find\PYZus{}contours}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}chain code}
+             \PY{n}{chain} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{contour2path}\PY{p}{(}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+22222322344344445445454456445445445656666667070010000700000100101210121221
+22222232344444445444545454544566565456666700670000700000010122120122122121
+2222232232323444445454456545456565666545656667667000000000000101210122121221
+22223434344444454544444566445664566666766700000000100100012200122001
+222222343444444445445656445664456645666670007070070000101001210012122121
+222222222223443444435444544454454456654566566666666767000000000000100121221001
+222222232223432323444444445444545445665666676666670700700070000000012110121
+22222222232343444445454454565445445656656566667076670007007000001200122001212201
+22222223223232234344344444445445456656566566667076766767670707000000001001012221
+2222222232323235443444456544444454545456666666767000070100701007012001000121
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Special works on 2 and 3}\label{special-works-on-2-and-3}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{measure}
+         \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits}\PY{n+nn}{.}\PY{n+nn}{mplot3d} \PY{k}{import} \PY{n}{Axes3D}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} qt
+         \PY{c+c1}{\PYZsh{}  Load zeros}
+         \PY{n}{twos\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{data\PYZus{}base\PYZus{}path}\PY{p}{,} \PY{n}{data\PYZus{}folder}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{part2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{twos\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{n}{nm} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{twos\PYZus{}path}\PY{p}{)} \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.png}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{nm}\PY{p}{]}  \PY{c+c1}{\PYZsh{} make sure to only load .png}
+         \PY{n}{twos\PYZus{}names}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} sort file names}
+         \PY{n}{ic} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{imread\PYZus{}collection}\PY{p}{(}\PY{p}{[}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{twos\PYZus{}path}\PY{p}{,} \PY{n}{nm}\PY{p}{)} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{twos\PYZus{}names}\PY{p}{]}\PY{p}{)}
+         \PY{n}{twos\PYZus{}im} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{concatenate\PYZus{}images}\PY{p}{(}\PY{n}{ic}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}  Load ones}
+         \PY{n}{threes\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{data\PYZus{}base\PYZus{}path}\PY{p}{,} \PY{n}{data\PYZus{}folder}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{part2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{threes\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{n}{nm} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{threes\PYZus{}path}\PY{p}{)} \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.png}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{nm}\PY{p}{]}  \PY{c+c1}{\PYZsh{} make sure to only load .png}
+         \PY{n}{threes\PYZus{}names}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} sort file names}
+         \PY{n}{ic} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{imread\PYZus{}collection}\PY{p}{(}\PY{p}{(}\PY{p}{[}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{threes\PYZus{}path}\PY{p}{,} \PY{n}{nm}\PY{p}{)} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{threes\PYZus{}names}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{threes\PYZus{}im} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{concatenate\PYZus{}images}\PY{p}{(}\PY{n}{ic}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}2}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{fft\PYZus{}lst\PYZus{}2}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}2\PYZus{}3d}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}3}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{fft\PYZus{}lst\PYZus{}3}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}3\PYZus{}3d}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{} Plot images}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{twos\PYZus{}im}\PY{p}{)}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{twos\PYZus{}im}\PY{p}{,} \PY{n}{twos\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{n}{contours} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{find\PYZus{}contours}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}signal creation}
+             \PY{n}{signal} \PY{o}{=} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{p}{(}\PY{l+m+mi}{1}\PY{n}{j}\PY{o}{*}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}fourier transform}
+             \PY{n}{fourier}\PY{o}{=}\PY{n}{fft}\PY{p}{(}\PY{n}{signal}\PY{p}{)}
+             \PY{n}{fft\PYZus{}lst\PYZus{}2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{fourier}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}2 first coef extraction}
+             \PY{n}{feature\PYZus{}list\PYZus{}2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             \PY{n}{feature\PYZus{}list\PYZus{}2\PYZus{}3d}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}plotting}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}ax.plot(snake[:, 0], snake[:, 1], \PYZsq{}\PYZhy{}b\PYZsq{}, lw=3)}
+             \PY{c+c1}{\PYZsh{}ax.plot(snake[:, 0], snake[:, 1], \PYZsq{}\PYZhy{}r\PYZsq{}, lw=3)1}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{nm}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{threes\PYZus{}im}\PY{p}{,} \PY{n}{threes\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{n}{contours} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{find\PYZus{}contours}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}signal creation}
+             \PY{n}{signal} \PY{o}{=} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{p}{(}\PY{l+m+mi}{1}\PY{n}{j}\PY{o}{*}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}fourier transform}
+             \PY{n}{fourier}\PY{o}{=}\PY{n}{fft}\PY{p}{(}\PY{n}{signal}\PY{p}{)}
+             \PY{n}{fft\PYZus{}lst\PYZus{}3}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{fourier}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}2 first coef extraction}
+             \PY{n}{feature\PYZus{}list\PYZus{}3}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             \PY{n}{feature\PYZus{}list\PYZus{}3\PYZus{}3d}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fourier}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}plotting}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{contours}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}ax.plot(snake[:, 0], snake[:, 1], \PYZsq{}\PYZhy{}b\PYZsq{}, lw=3)}
+             \PY{c+c1}{\PYZsh{}ax.plot(snake[:, 0], snake[:, 1], \PYZsq{}\PYZhy{}r\PYZsq{}, lw=3)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{nm}\PY{p}{)}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax1} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}2}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}3}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}2}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}3}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}2}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}2}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}3}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}3}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax1} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{,} \PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}2}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}3}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}2}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}3}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}2}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}2}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}2\PYZus{}3d}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}3}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}3}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}3\PYZus{}3d}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{n}{fourier} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}3}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}3}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markerfmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{og}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{fft\PYZus{}lst\PYZus{}2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}72}]:} (0, 500)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{measure}
+         \PY{c+c1}{\PYZsh{}  Load zeros}
+         \PY{n}{twos\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{data\PYZus{}base\PYZus{}path}\PY{p}{,} \PY{n}{data\PYZus{}folder}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{part2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{twos\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{n}{nm} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{twos\PYZus{}path}\PY{p}{)} \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.png}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{nm}\PY{p}{]}  \PY{c+c1}{\PYZsh{} make sure to only load .png}
+         \PY{n}{twos\PYZus{}names}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} sort file names}
+         \PY{n}{ic} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{imread\PYZus{}collection}\PY{p}{(}\PY{p}{[}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{twos\PYZus{}path}\PY{p}{,} \PY{n}{nm}\PY{p}{)} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{twos\PYZus{}names}\PY{p}{]}\PY{p}{)}
+         \PY{n}{twos\PYZus{}im} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{concatenate\PYZus{}images}\PY{p}{(}\PY{n}{ic}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}  Load ones}
+         \PY{n}{threes\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{data\PYZus{}base\PYZus{}path}\PY{p}{,} \PY{n}{data\PYZus{}folder}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{part2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{threes\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{n}{nm} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{threes\PYZus{}path}\PY{p}{)} \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.png}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{nm}\PY{p}{]}  \PY{c+c1}{\PYZsh{} make sure to only load .png}
+         \PY{n}{threes\PYZus{}names}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} sort file names}
+         \PY{n}{ic} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{imread\PYZus{}collection}\PY{p}{(}\PY{p}{(}\PY{p}{[}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{threes\PYZus{}path}\PY{p}{,} \PY{n}{nm}\PY{p}{)} \PY{k}{for} \PY{n}{nm} \PY{o+ow}{in} \PY{n}{threes\PYZus{}names}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{threes\PYZus{}im} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{concatenate\PYZus{}images}\PY{p}{(}\PY{n}{ic}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{} Plot images}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{twos\PYZus{}im}\PY{p}{)}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{twos\PYZus{}im}\PY{p}{,} \PY{n}{twos\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}regions detections}
+             \PY{n}{label\PYZus{}img} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{label}\PY{p}{(}\PY{n}{im}\PY{o}{\PYZgt{}}\PY{l+m+mi}{90}\PY{p}{)}
+             \PY{n}{regions} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{regionprops}\PY{p}{(}\PY{n}{label\PYZus{}img}\PY{p}{)}
+             \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{k}{for} \PY{n}{props} \PY{o+ow}{in} \PY{n}{regions}\PY{p}{:}
+                 \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{p}{)}
+                 \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{perimeter}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{props}\PY{o}{.}\PY{n}{area} \PY{o}{==} \PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{p}{)}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{}compacity and rectangularity}
+                     \PY{n}{compacity} \PY{o}{=} \PY{p}{(}\PY{n}{props}\PY{o}{.}\PY{n}{perimeter}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{n}{props}\PY{o}{.}\PY{n}{area}
+                     \PY{n}{rectangularity} \PY{o}{=} \PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{o}{/}\PY{n}{props}\PY{o}{.}\PY{n}{bbox\PYZus{}area}
+                     \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{compacity}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{perimeter}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{label\PYZus{}img}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{nm}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{im}\PY{p}{,} \PY{n}{nm} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{threes\PYZus{}im}\PY{p}{,} \PY{n}{threes\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{n}{label\PYZus{}img} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{label}\PY{p}{(}\PY{n}{im}\PY{o}{\PYZgt{}}\PY{l+m+mi}{90}\PY{p}{)}
+             \PY{n}{regions} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{regionprops}\PY{p}{(}\PY{n}{label\PYZus{}img}\PY{p}{)}
+             \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{k}{for} \PY{n}{props} \PY{o+ow}{in} \PY{n}{regions}\PY{p}{:}
+                 \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{p}{)}
+                 \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{perimeter}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{props}\PY{o}{.}\PY{n}{area} \PY{o}{==} \PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{p}{)}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{}compacity and rectangularity}
+                     \PY{n}{compacity} \PY{o}{=} \PY{p}{(}\PY{n}{props}\PY{o}{.}\PY{n}{perimeter}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{n}{props}\PY{o}{.}\PY{n}{area}
+                     \PY{n}{rectangularity} \PY{o}{=} \PY{n}{props}\PY{o}{.}\PY{n}{area}\PY{o}{/}\PY{n}{props}\PY{o}{.}\PY{n}{bbox\PYZus{}area}
+                     \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{compacity} \PY{p}{,}\PY{n}{props}\PY{o}{.}\PY{n}{perimeter}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{label\PYZus{}img}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{nm}\PY{p}{)}
+         \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,}\PY{n}{ax2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}feature\PYZus{}list\PYZus{}0[0]=(feature\PYZus{}list\PYZus{}0[0]\PYZhy{}np.mean(feature\PYZus{}list\PYZus{}0))/(np.mean(feature\PYZus{}list\PYZus{}0))}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{p}{,}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}0\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{feature\PYZus{}list\PYZus{}1\PYZus{}ev}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+--------
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
